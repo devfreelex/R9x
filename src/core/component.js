@@ -17,6 +17,10 @@ const _arrayToObject = (list) => {
 	return methods
 }
 
+const _bindTemplate = () => {
+	_component.template()
+}
+
 const createComponent = () => { 
 	const scope = _scope()
 
@@ -25,7 +29,7 @@ const createComponent = () => {
 			_component[key.name] = key()
 		}
 
-		if(key.name === 'render') {
+		if(key.name === 'template') {
 			_component[key.name] = key
 		}
 
@@ -36,12 +40,23 @@ const createComponent = () => {
 
 	_component.init = () => {
 		_listenHooks()
-		_component.render()
+		_bindTemplate()
+		render()
 		_emitEvent(_component.name, 'beforeOnRender')
+		_bindStyles()
 		_initListeners()
+		console.log(_component.render)
 	}
 
 	return Object.assign({}, _component)
+}
+
+const render = () => {
+	const { elements, template } = _component
+	console.log(_component)
+	elements.forEach( element => {
+		element.innerHTML = template()
+	})
 }
 
 const _emitEvent = (componentName, eventName) => {
@@ -88,13 +103,11 @@ const query = (selector, context) => {
 }
 
 const _initListeners = () => {
-	window.addEventListener('DOMContentLoaded', (e) => {
-		const { listeners, methods } = _component
-		const elm = Array.from(document.querySelectorAll(_component.name))
+	const { listeners, methods } = _component
+	const elm = Array.from(document.querySelectorAll(_component.name))
 
-		listeners.forEach( listener => { 
-			listener({elm, on, query}, methods)
-		})
+	listeners.forEach(listener => {
+		listener({ elm, on, query }, methods)
 	})
 	_emitEvent(_component.name, 'afterOnRender')
 }
@@ -110,22 +123,32 @@ const setStyle = (style) => {
 	.replace(/\n/g, '')
 }
 
-const _bindStyles = () => {
-	if(!_component.style) return
+const _isEmptyStyle = () => {
+	return !!_component.style === false
+}
+
+const _styleExists = () => {
+	const styleId = _component.name
+	const styleElement = document.querySelector(`style#${styleId}`)
+	return !!styleElement	=== true
+}
+
+const _insertStyle = () => {
 	const styleElement = document.createElement('style')
-	const idElement = _component.name
-	styleElement.setAttribute('id', idElement)
-	styleElement.innerHTML = _component.style
-	!document.body.contains(styleElement)
-	?	document.body.append(styleElement)
-	: ''
+	styleElement.setAttribute('id', _component.name)
+	styleElement.textContent = _component.style
+	document.body.insertAdjacentElement('beforeend', styleElement)
+}
+
+const _bindStyles = () => {
+	if (_isEmptyStyle() || _styleExists()) return
+	_insertStyle()
 }
 const renderer = (template) => {
+	
 	const elements = Array.from(document.querySelectorAll(_component.name))
-	_bindStyles()
-	elements.forEach( element => {
-		element.innerHTML = template()
-	})
+	_component.elements = elements
+	_component.template = template
 }
 
 const html = (tags, ...values) => {
@@ -140,6 +163,7 @@ export {
 	_initListeners, 
 	logComponent, 
 	renderer, 
+	render,
 	setStyle,
 	html,
 	html as css

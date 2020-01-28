@@ -1,5 +1,5 @@
 import { getState, watch, mapActions } from '../../core/store.js'
-import { setScope, createComponent } from '../../core/component.js'
+import { setScope, createComponent, render } from '../../core/component.js'
 import { taskRegisterTemplate } from './taskRegister.template.js'
 import { taskRegisterStyle } from './taskRegister.style.js'
 const appTaskRegister = () => {
@@ -9,9 +9,8 @@ const appTaskRegister = () => {
 	])
 
 	setScope(() => [
-		// style, template, render, hooks, listeners, 
 		name,
-		render,
+		template,
 		hooks,
 		listeners,
 		methods
@@ -19,9 +18,8 @@ const appTaskRegister = () => {
  
 	const name = () => ['app-task-register']
 
-	const render = () => {
+	const template = () => {
 		taskRegisterTemplate(getState())
-		taskRegisterStyle()
 		taskRegisterStyle()
 	}
 
