@@ -38,22 +38,23 @@ const createComponent = () => {
 		}
 	})
 
-	_component.init = () => {
+	_component.init = (parentNode) => {
 		_listenHooks()
 		_bindTemplate()
 		render()
 		_emitEvent(_component.name, 'beforeOnRender')
 		_bindStyles()
 		_initListeners()
-		console.log(_component.render)
 	}
 
 	return Object.assign({}, _component)
 }
 
-const render = () => {
+const render = (parentNode) => {
 	const { elements, template } = _component
-	console.log(_component)
+	if(!elements || !elements.length) {
+		console.log(parentNode)
+	}
 	elements.forEach( element => {
 		element.innerHTML = template()
 	})

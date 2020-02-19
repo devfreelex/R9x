@@ -28,7 +28,8 @@ const appFactory = () => {
 	}
 
 	const _initRouter = () => {
-		_router.init()
+		// if(!_router || !_router.init) return
+		// _router.init()
 	}
 
 	const use = (type, value) => {
