@@ -1,3 +1,6 @@
+import 'whatwg-fetch'
+import '@babel/polyfill'
+
 import { appFactory } from './core/app.js'
 import { store } from './store/store.js'
 import { appTaskRegister } from './components/taskRegister/taskRegister.component.js'
