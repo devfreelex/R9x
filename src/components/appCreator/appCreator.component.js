@@ -2,7 +2,7 @@ import { getState, watch, mapActions } from '../../core/store'
 import { setScope, createComponent, render } from '../../core/component'
 import { appCreatorTemplate } from './appCreator.template'
 import { appCreatorStyle } from './appCreator.style'
-const appCreatorRegister = () => {
+const appCreatorComponent = () => {
 
 	watch(['CHANGE_MENU'], () => [
 		changeIcon
@@ -98,4 +98,4 @@ const appCreatorRegister = () => {
 	return createComponent()
 }
 
-export { appCreatorRegister }
+export { appCreatorComponent }

@@ -1,7 +1,7 @@
 import { renderer, html } from '../../core/component'
 
 const appMenuTemplate = (state) => {
-	
+
 	const template = () => html`
 	<div class="app-menu-wrapper ${state.menu.isVisible ? 'app-menu-visible' : ''}">
 		<div class="app-menu-header">
@@ -13,79 +13,93 @@ const appMenuTemplate = (state) => {
 				<input type="text" class="app-menu-search">
 			</label>
 		</div>
-		<div class="app-menu-options">
-			<div class="app-menu-options-title">
-			<i class="lni-ruler-pencil app-menu-icon"></i> Iterações
-			</div>
-		</div>
 
 		<div class="app-menu-resource">
+			<div class="app-menu-options-title">
+			<i class="lni-ruler-pencil app-menu-icon"></i> Iterações
+			</div>			
 			<ul class="app-menu-list">
 				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
+					<i class="lni-microphone app-box-icon"></i> 
+					<span class="app-box-text">Iníciar</span>
 				</li>
 				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
+					<i class="lni-soundcloud app-box-icon"></i> 
+					<span class="app-box-text">Avaliar fala</span>
 				</li>
 				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
+					<i class="lni-text-size app-box-icon"></i> 
+					<span class="app-box-text">Avaliar texto</span>
 				</li>
 				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
+					<i class="lni-page-break app-box-icon"></i> 
+					<span class="app-box-text">Encerrar</span>
 				</li>
 			</ul>
 
 			<div class="app-menu-options-title">
-			<i class="lni-ruler-pencil app-menu-icon"></i> Iterações
+				<i class="lni-fireworks app-menu-icon"></i>	Outros Recursos
 			</div>
 
 			<ul class="app-menu-list">
 				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
+					<i class="lni-shortcode app-box-icon"></i> 
+					<span class="app-box-text">Outro ...</span>
 				</li>
 				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
+					<i class="lni-shortcode app-box-icon"></i> 
+					<span class="app-box-text">Outro ...</span>
 				</li>
 				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
+					<i class="lni-shortcode app-box-icon"></i> 
+					<span class="app-box-text">Outro ...</span>
 				</li>
 				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
+					<i class="lni-shortcode app-box-icon"></i> 
+					<span class="app-box-text">Outro ...</span>
 				</li>
-			</ul>			
+			</ul>		
+			
+<div class="app-menu-options-title">
+				<i class="lni-fireworks app-menu-icon"></i>	Mais Recursos
+			</div>
+
+			<ul class="app-menu-list">
+				<li class="app-menu-item">
+					<i class="lni-shortcode app-box-icon"></i> 
+					<span class="app-box-text">Outro ...</span>
+				</li>
+				<li class="app-menu-item">
+					<i class="lni-shortcode app-box-icon"></i> 
+					<span class="app-box-text">Outro ...</span>
+				</li>
+				<li class="app-menu-item">
+					<i class="lni-shortcode app-box-icon"></i> 
+					<span class="app-box-text">Outro ...</span>
+				</li>
+				<li class="app-menu-item">
+					<i class="lni-shortcode app-box-icon"></i> 
+					<span class="app-box-text">Outro ...</span>
+				</li>
+				<li class="app-menu-item">
+					<i class="lni-shortcode app-box-icon"></i> 
+					<span class="app-box-text">Outro ...</span>
+				</li>
+				<li class="app-menu-item">
+					<i class="lni-shortcode app-box-icon"></i> 
+					<span class="app-box-text">Outro ...</span>
+				</li>
+				<li class="app-menu-item">
+					<i class="lni-shortcode app-box-icon"></i> 
+					<span class="app-box-text">Outro ...</span>
+				</li>
+				<li class="app-menu-item">
+					<i class="lni-shortcode app-box-icon"></i> 
+					<span class="app-box-text">Outro ...</span>
+				</li>				
+			</ul>				
 		</div>
-
-
-<div class="app-menu-resource">
-			<ul class="app-menu-list">
-				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
-				</li>
-				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
-				</li>
-				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
-				</li>
-				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
-				</li>
-			</ul>
-			<ul class="app-menu-list">
-				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
-				</li>
-				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
-				</li>
-				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
-				</li>
-				<li class="app-menu-item">
-					<i class="lni-mashroom"></i> Iniciar Fala
-				</li>
-			</ul>			
-		</div>		
+		
 	</div>
 	`
 	renderer(template)

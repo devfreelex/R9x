@@ -3,7 +3,7 @@ import { setScope, createComponent, render } from '../../core/component'
 import { mainTemplate } from './main.template'
 import { mainStyle } from './main.style'
 
-const appMainRegister = () => {
+const appMainComponent = () => {
 	watch(['CHANGE_TITLE'], () => [
 		alerterState, render
 	])
@@ -72,4 +72,4 @@ const appMainRegister = () => {
 	return createComponent()
 }
 
-export { appMainRegister }
+export { appMainComponent }

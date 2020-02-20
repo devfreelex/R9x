@@ -44,7 +44,6 @@ const createComponent = () => {
 		render(parentNode)
 		_emitEvent(_component.name, 'beforeOnRender')
 		_bindStyles()
-		_initListeners()
 	}
 
 	return Object.assign({}, _component)
@@ -52,12 +51,6 @@ const createComponent = () => {
 
 const render = (parentNode) => { 
 	const { elements, template } = _component
-	if(!elements || !elements.length) {
-		console.log('--->',parentNode)
-	}
-
-	_listenHooks()
-	_emitEvent(_component.name, 'beforeOnRender')
 
 	elements.forEach( element => {
 		element.innerHTML = template()
@@ -77,6 +70,7 @@ const _getHandlers = (hook) => {
 
 const _execHandlers = (hookName, handlers) => {
 	if(!handlers || !handlers.length) return
+
 	handlers.forEach(handler => {
 		eventDrive.on(_component.name, hookName, handler)
 	})
@@ -167,7 +161,6 @@ const html = (tags, ...values) => {
 export { 
 	setScope, 
 	createComponent , 
-	_initListeners, 
 	logComponent, 
 	renderer, 
 	render,
