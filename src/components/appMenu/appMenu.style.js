@@ -9,7 +9,7 @@ const appMenuStyle = (ctx) => {
 			float:left;
 			width:100%;
 			max-width:800px;
-			height:auto;
+			height:0;
 			padding:0;
 			background:rgba(255, 255, 255, .8);
 			border: 1px rgb(227, 74, 59) solid;
@@ -21,7 +21,8 @@ const appMenuStyle = (ctx) => {
 			left:50%;
 			z-index:100;
 			transform: translateX(-50%);
-			transition: .5s ease-in
+			transition: .5s ease-in;
+			overflow:hidden;
 		}
 
 		.app-menu-wrapper::before {
@@ -190,7 +191,9 @@ const appMenuStyle = (ctx) => {
 	
 
 		.app-menu-visible {
-			opacity:1
+			opacity:1;
+			height:auto;
+			overflow:visible;
 		}
 	`
 

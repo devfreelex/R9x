@@ -1,0 +1,27 @@
+.umap {
+	display:block;
+	float:left;
+	position:absolute;
+	top:75px;
+	left:50%;
+	transform:translateX(-50%);
+	z-index:5000
+}
+
+.umap.template {
+	height:75px;
+	width:100%;
+	max-width:250px;
+	border:1px #fff solid;
+	border-radius:4px;
+	background:rgba(255, 255, 255, .8);
+	box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);	
+}
+
+.umap .title {
+	display: block;
+	float:left;
+	width:100%;
+	padding:15px;
+	border-bottom:1px #ebebeb solid;
+}

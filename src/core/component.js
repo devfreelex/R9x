@@ -2,6 +2,7 @@ import { eventDrive } from './eventDrive'
 
 const _component = {}
 let _scope = null
+let elm = null
 
 const setScope = (schema) => { 
 	_scope = schema
@@ -57,7 +58,7 @@ const render = (parentNode) => {
 	})
 
 	_bindStyles()
-	_initListeners()	
+	_initListeners(elements)	
 }
 
 const _emitEvent = (componentName, eventName) => {
@@ -68,11 +69,12 @@ const _getHandlers = (hook) => {
 	return hook()
 }
 
-const _execHandlers = (hookName, handlers) => {
+const _execHandlers = (hookName, handlers) => { 
 	if(!handlers || !handlers.length) return
-
+	elm = Array.from(document.querySelectorAll(_component.name))
 	handlers.forEach(handler => {
-		eventDrive.on(_component.name, hookName, handler)
+		const handle = handler.bind(null, {elm, query, on})
+		eventDrive.on(_component.name, hookName, handle)
 	})
 }
 
@@ -103,10 +105,9 @@ const query = (selector, context) => {
 	})
 }
 
-const _initListeners = () => {
+const _initListeners = (elements) => {
 	const { listeners, methods } = _component
-	const elm = Array.from(document.querySelectorAll(_component.name))
-
+	elm = Array.from(document.querySelectorAll(_component.name))
 	listeners.forEach(listener => {
 		listener({ elm, on, query }, methods)
 	})

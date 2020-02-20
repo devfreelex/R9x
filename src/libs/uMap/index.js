@@ -1,4 +1,4 @@
-import { initConversation } from './initConversation'
+import { initConversation } from './templates/initConversation'
 
 const uMap = () => {
 	const templates = {

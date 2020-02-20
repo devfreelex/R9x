@@ -1,11 +1,11 @@
 import { getState, watch, mapActions } from '../../core/store'
-import { setScope, createComponent, render } from '../../core/component'
+import { setScope, createComponent, render, setStyle } from '../../core/component'
 import { appMenuTemplate } from './appMenu.template'
 import { appMenuStyle } from './appMenu.style'
 const appMenuComponent = () => {
 
 	watch(['CHANGE_MENU'], () => [
-		 render
+		 render, 
 	])
 
 	setScope(() => [
@@ -16,6 +16,7 @@ const appMenuComponent = () => {
 		methods
 	])
  
+
 	const name = () => ['app-menu']	
 
 	const template = () => {
@@ -29,14 +30,12 @@ const appMenuComponent = () => {
 	]
 
 	const listeners = () => [
-		onClickButton, onClickMenu
+		onClickMenu
 	]
 	
 	const methods = () => [
 		...mapActions(),
-		otherMethod,
-		afterRender,
-		createNode
+		createNode,
 	]
 
 	const beforeOnRender = () => []
@@ -45,15 +44,9 @@ const appMenuComponent = () => {
 	//hooks
 
 	//listeners
-	const onClickButton = ({elm, on, query}, {changeMenu}) => { 
-		const button = query('button', elm)
-		const menuStatus = {menu: {isVisible:true}}
-		on('click', button, () => changeMenu(menuStatus))
-	}
-
 	const onClickMenu = ({ elm, on, query}, { createNode, changeMenu }) => {
 		const menuItems = query('.app-menu-item', elm)
-		
+
 		on('click', menuItems, ({target}) => {
 			const menuStatus = { 
 				menu: { isVisible: getState().menu.isVisible } 
@@ -67,27 +60,6 @@ const appMenuComponent = () => {
 	// METHODS
 	const createNode = () => {
 		console.log('criando node....')
-	}
-
-	const afterRender = () => {
-		console.log('afterRender: ', {title:'yyy'})
-	}
-
-	const beforeRender = (state) => {
-		console.log('beforeRender:--->', {title: 'xxx'})
-	}
-
-	const logStateOnInit = () => {
-		console.log(getState())
-	}
-
-
-	const otherMethod = () => {
-		console.log('other')
-	}	
-
-	const alerterState = (state) => {
-		console.log('alerterState:--->', state)
 	}
 		
 	return createComponent()

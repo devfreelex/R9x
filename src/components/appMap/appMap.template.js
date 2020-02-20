@@ -1,5 +1,5 @@
 import { renderer, html } from '../../core/component'
-
+import '../../libs/uMap/styles/uMap.css'
 const appMapTemplate = (state) => {
 	
 	const template = () => html`
