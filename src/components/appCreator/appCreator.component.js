@@ -2,7 +2,7 @@ import { getState, watch, mapActions } from '../../core/store'
 import { setScope, createComponent, render } from '../../core/component'
 import { appCreatorTemplate } from './appCreator.template'
 import { appCreatorStyle } from './appCreator.style'
-import { menuEventDrive } from '../../customEvents'
+
 const appCreatorComponent = () => {
 
 	watch(['CHANGE_MENU'], () => [
@@ -52,7 +52,6 @@ const appCreatorComponent = () => {
 			const menuStatus = {menu: {isVisible:getState().menu.isVisible}}
 			changeMenu(menuStatus)
 			changeIcon()
-			menuEventDrive.emit('onUpdateMenuStyle', {statu: true})
 		})
 	}
 
