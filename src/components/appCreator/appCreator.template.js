@@ -7,6 +7,7 @@ const appCreatorTemplate = (state) => {
 		<button class="btn btn-round btn-align-center">
 			<i class="lni-plus"></i>
 		</button>
+		<app-menu></app-menu>
 	</div>
 	`
 	renderer(template)

@@ -41,7 +41,7 @@ const createComponent = () => {
 	_component.init = (parentNode) => {
 		_listenHooks()
 		_bindTemplate()
-		render()
+		render(parentNode)
 		_emitEvent(_component.name, 'beforeOnRender')
 		_bindStyles()
 		_initListeners()
@@ -50,14 +50,21 @@ const createComponent = () => {
 	return Object.assign({}, _component)
 }
 
-const render = (parentNode) => {
+const render = (parentNode) => { 
 	const { elements, template } = _component
 	if(!elements || !elements.length) {
-		console.log(parentNode)
+		console.log('--->',parentNode)
 	}
+
+	_listenHooks()
+	_emitEvent(_component.name, 'beforeOnRender')
+
 	elements.forEach( element => {
 		element.innerHTML = template()
 	})
+
+	_bindStyles()
+	_initListeners()	
 }
 
 const _emitEvent = (componentName, eventName) => {
@@ -91,15 +98,14 @@ const _listenHooks = () => {
 }
 
 const on = (eventName, context, callback) => {
-	
 	context.forEach( target => { 
 		target[`on${eventName}`] = callback
 	})
 }
 
 const query = (selector, context) => {
-	return context.flatMap( target => {
-		return Array.from(target.querySelectorAll(selector))
+	return context.flatMap( parent => {
+		return Array.from(parent.querySelectorAll(selector))
 	})
 }
 
@@ -119,9 +125,9 @@ const setStyle = (style) => {
 	if(!style) return
 	_component['style'] = style.trim()
 	.replace(/.+{/g, `${_component.name} $&`)
-	.replace(/\s{2,}/g, '')
-	.replace(/\s*\}/g, '} ')
-	.replace(/\n/g, '')
+	// .replace(/\s{2,}/g, '')
+	// .replace(/\s*\}/g, '} ')
+	// .replace(/\n/g, '')
 }
 
 const _isEmptyStyle = () => {
