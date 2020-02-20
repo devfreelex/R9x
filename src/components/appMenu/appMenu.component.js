@@ -52,10 +52,12 @@ const appMenuComponent = () => {
 	}
 
 	const onClickMenu = ({ elm, on, query}, { createNode, changeMenu }) => {
-		const menuStatus = { menu: { isVisible: false } }
 		const menuItems = query('.app-menu-item', elm)
-	
-		on('click', menuItems, ({target}) => { console.log(target)
+		
+		on('click', menuItems, ({target}) => {
+			const menuStatus = { 
+				menu: { isVisible: getState().menu.isVisible } 
+			}
 			createNode()
 			changeMenu(menuStatus)
 		})

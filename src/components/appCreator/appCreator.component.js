@@ -5,8 +5,10 @@ import { appCreatorStyle } from './appCreator.style'
 const appCreatorRegister = () => {
 
 	watch(['CHANGE_MENU'], () => [
-		 alerterState
+		changeIcon
 	])
+
+	let iconsMenu = null
 
 	setScope(() => [
 		name,
@@ -34,6 +36,7 @@ const appCreatorRegister = () => {
 	
 	const methods = () => [
 		...mapActions(),
+		changeIcon,
 		otherMethod,
 		afterRender
 	]
@@ -43,8 +46,32 @@ const appCreatorRegister = () => {
 
 	const onClickButton = ({elm, on, query}, {changeMenu}) => { 
 		const button = query('button', elm)
-		const menuStatus = {menu: {isVisible:true}}
-		on('click', button, () => changeMenu(menuStatus))
+		iconsMenu = query('.app-creator-icon', elm)
+		on('click', button, () => {
+			const menuStatus = {menu: {isVisible:getState().menu.isVisible}}
+			changeMenu(menuStatus)
+			changeIcon()
+		})
+	}
+
+	const changeIcon = () => { 
+		const state = getState()
+		
+		const iconMenu = iconsMenu.find( icon => {
+			if (icon.classList.contains('lni-menu')) return icon
+		})
+		const iconClose = iconsMenu.find(icon => {
+			if (icon.classList.contains('lni-close')) return icon
+		})
+		
+		if(!state.menu.isVisible) {
+			iconMenu.classList.add('show-icon')
+			iconClose.classList.remove('show-icon')
+			return
+		}
+
+		iconMenu.classList.remove('show-icon')
+		iconClose.classList.add('show-icon')
 	}
 
 	const afterRender = () => {

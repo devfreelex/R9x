@@ -1,6 +1,6 @@
 import { renderer, html } from '../../core/component'
 
-const appMenuTemplate = (state) => { console.log('--->', state.menu)
+const appMenuTemplate = (state) => {
 	
 	const template = () => html`
 	<div class="app-menu-wrapper ${state.menu.isVisible ? 'app-menu-visible' : ''}">

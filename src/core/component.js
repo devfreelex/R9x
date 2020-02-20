@@ -77,7 +77,7 @@ const _getHandlers = (hook) => {
 
 const _execHandlers = (hookName, handlers) => {
 	if(!handlers || !handlers.length) return
-	handlers.forEach(handler => { 
+	handlers.forEach(handler => {
 		eventDrive.on(_component.name, hookName, handler)
 	})
 }
