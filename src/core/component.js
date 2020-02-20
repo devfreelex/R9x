@@ -1,4 +1,4 @@
-import { eventDrive } from './eventDrive.js'
+import { eventDrive } from './eventDrive'
 
 const _component = {}
 let _scope = null

@@ -1,7 +1,7 @@
-import { setStore } from '../core/store.js'
-import { state } from './state.js'
-import { actions } from './actions.js'
-import { mutations } from './mutations.js'
+import { setStore } from '../core/store'
+import { state } from './state'
+import { actions } from './actions'
+import { mutations } from './mutations'
 
 const storeFactory = () => {
 

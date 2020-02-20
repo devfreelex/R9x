@@ -1,4 +1,4 @@
-import { setStyle, css } from '../../core/component.js'
+import { setStyle, css } from '../../core/component'
 
 const taskRegisterStyle = () => {
 	const style = css`

@@ -1,4 +1,4 @@
-import { renderer, html } from '../../core/component.js'
+import { renderer, html } from '../../core/component'
 
 const taskRegisterTemplate = (state) => { console.log(state)
 	

@@ -1,14 +1,14 @@
-import { dispatch } from './../core/store.js'
+import { dispatch } from './../core/store'
 
 
-const updateTitle = (payload) => {
-	dispatch('CHANGE_TITLE', payload)
+const changeMenu = (payload) => {
+	dispatch('CHANGE_MENU', payload)
 }
 
 const changeOther = (payload) => { console.log('other')}
 
 const actions = {
-	updateTitle
+	changeMenu
 }
 
 export { actions }

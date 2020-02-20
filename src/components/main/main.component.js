@@ -1,13 +1,13 @@
 import { getState, watch, mapActions } from '../../core/store'
 import { setScope, createComponent, render } from '../../core/component'
-import { taskRegisterTemplate } from './taskRegister.template'
-import { taskRegisterStyle } from './taskRegister.style'
-const appNotFound = () => {
+import { mainTemplate } from './main.template'
+import { mainStyle } from './main.style'
 
+const appMainRegister = () => {
 	watch(['CHANGE_TITLE'], () => [
-		 alerterState, render
+		alerterState, render
 	])
-
+	
 	setScope(() => [
 		name,
 		template,
@@ -15,12 +15,13 @@ const appNotFound = () => {
 		listeners,
 		methods
 	])
- 
-	const name = () => ['app-not-found']
+
+
+	const name = () => ['app-main']	
 
 	const template = () => {
-		taskRegisterTemplate(getState())
-		taskRegisterStyle()
+		mainTemplate(getState())
+		mainStyle(name())
 	}
 
 	const hooks = () => [
@@ -29,7 +30,7 @@ const appNotFound = () => {
 	]
 
 	const listeners = () => [
-		onClickChangeTitle
+		// onClickChangeTitle
 	]
 	
 	const methods = () => [
@@ -42,9 +43,9 @@ const appNotFound = () => {
 	const afterOnRender = () => []
 
 	const onClickChangeTitle = ({elm, on, query}, {updateTitle}) => { 
-		const h1 = query('h1', elm)
-		const title = 'Novo título....'
-		on('click', h1, () => updateTitle({title}))
+		// const h1 = query('h1', elm)
+		// const title = 'Novo título....'
+		// on('click', h1, () => updateTitle({title}))
 	}
 
 	const afterRender = () => {
@@ -71,4 +72,4 @@ const appNotFound = () => {
 	return createComponent()
 }
 
-export { appNotFound }
+export { appMainRegister }

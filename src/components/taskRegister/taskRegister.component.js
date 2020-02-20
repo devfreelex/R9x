@@ -1,7 +1,7 @@
-import { getState, watch, mapActions } from '../../core/store.js'
-import { setScope, createComponent, render } from '../../core/component.js'
-import { taskRegisterTemplate } from './taskRegister.template.js'
-import { taskRegisterStyle } from './taskRegister.style.js'
+import { getState, watch, mapActions } from '../../core/store'
+import { setScope, createComponent, render } from '../../core/component'
+import { taskRegisterTemplate } from './taskRegister.template'
+import { taskRegisterStyle } from './taskRegister.style'
 const appTaskRegister = () => {
 
 	watch(['CHANGE_TITLE'], () => [

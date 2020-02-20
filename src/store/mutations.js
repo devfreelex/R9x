@@ -1,11 +1,11 @@
-import { logState } from '../core/store.js'
+import { logState } from '../core/store'
 
-const CHANGE_TITLE = (state, payload) => {
-	state.title = payload.title
+const CHANGE_MENU = (state, payload) => {
+	state.menu.isVisible = payload.menu.isVisible
 }
 
 const mutations = {
-	CHANGE_TITLE
+	CHANGE_MENU
 }
 
 export { mutations }

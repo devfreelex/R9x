@@ -1,4 +1,4 @@
-import { routerFactory } from '../store/router.js'
+import { routerFactory } from '../store/router'
 
 const appFactory = () => {
 	let _components = {}

@@ -1,11 +1,11 @@
 import { getState, watch, mapActions } from '../../core/store'
 import { setScope, createComponent, render } from '../../core/component'
-import { taskRegisterTemplate } from './taskRegister.template'
-import { taskRegisterStyle } from './taskRegister.style'
-const appNotFound = () => {
+import { appCreatorTemplate } from './appCreator.template'
+import { appCreatorStyle } from './appCreator.style'
+const appCreatorRegister = () => {
 
-	watch(['CHANGE_TITLE'], () => [
-		 alerterState, render
+	watch(['CHANGE_MENU'], () => [
+		 alerterState
 	])
 
 	setScope(() => [
@@ -16,11 +16,11 @@ const appNotFound = () => {
 		methods
 	])
  
-	const name = () => ['app-not-found']
+	const name = () => ['app-creator']	
 
 	const template = () => {
-		taskRegisterTemplate(getState())
-		taskRegisterStyle()
+		appCreatorTemplate(getState())
+		appCreatorStyle()
 	}
 
 	const hooks = () => [
@@ -29,7 +29,7 @@ const appNotFound = () => {
 	]
 
 	const listeners = () => [
-		onClickChangeTitle
+		onClickButton
 	]
 	
 	const methods = () => [
@@ -41,10 +41,10 @@ const appNotFound = () => {
 	const beforeOnRender = () => []
 	const afterOnRender = () => []
 
-	const onClickChangeTitle = ({elm, on, query}, {updateTitle}) => { 
-		const h1 = query('h1', elm)
-		const title = 'Novo título....'
-		on('click', h1, () => updateTitle({title}))
+	const onClickButton = ({elm, on, query}, {changeMenu}) => { 
+		const button = query('button', elm)
+		const menuStatus = {menu: {isVisible:true}}
+		on('click', button, () => changeMenu(menuStatus))
 	}
 
 	const afterRender = () => {
@@ -71,4 +71,4 @@ const appNotFound = () => {
 	return createComponent()
 }
 
-export { appNotFound }
+export { appCreatorRegister }
