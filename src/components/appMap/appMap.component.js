@@ -17,7 +17,7 @@ const appMapComponent = () => {
 		methods
 	])
 
-	const editor = uMap()
+	let editor = null
 	let context = null
  
 	const name = () => ['app-map']	
@@ -42,7 +42,9 @@ const appMapComponent = () => {
 	const afterOnRender = () => [setInitNodeMap]
 
 	const setInitNodeMap = () => {
+		
 		const state = getState()
+		editor = uMap()
 		const init = editor.getComponent(state, 'initConversation')
 		const end = editor.getComponent(state, 'endConversation')
 		

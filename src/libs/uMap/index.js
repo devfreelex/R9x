@@ -1,15 +1,16 @@
 import { initConversation } from './components/initConversation'
 
 const uMap = () => {
+	const rootNode = document.querySelector('#uMapArea')
 	
 	const components = {
-		initConversation: initConversation()
+		initConversation
 	}
 
 	const getComponent = (state, componentName) => {
-		return initConversation(state)
+		if(typeof components[componentName] !== 'function') return
+		return components[componentName](rootNode, state)
 	}
-
 
 	return {
 		getComponent

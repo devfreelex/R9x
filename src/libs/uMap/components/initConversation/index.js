@@ -1,9 +1,9 @@
 import { html } from '../../../../core/component'
-import { listenerFactory } from '../../utils/listener.factory'
+import { controllerFactory } from '../../utils/controller.factory'
 
-const initConversation = () => {
-
-	const listener = listenerFactory()
+const initConversation = (rootNode, state) => {
+	
+	const controller = controllerFactory()
 
 	const template = (state) => html`
 		<init-conversation class="umap template">
@@ -30,22 +30,37 @@ const initConversation = () => {
 		return Array.from(nodeElement.querySelectorAll(selector))
 	}
 
+	const isArrow = (e) => {
+		return e.target && e.target.classList.contains('arrow')
+	}
+
 	const onMouseMove = (root) => {
-		listener.on('onmousemove', [document.body], (e) => {
-			listener.setAxes({ x: e.clientX, y: e.clientY })
-			listener.moveElement()
+		controller.on('onmousemove', [document.body], (e) => {
+			controller.setAxes({ x: e.clientX, y: e.clientY })
+			controller.moveElement()
 		})
 	}
 
 	const onMouseDown = (root) => {
-		listener.on('onmousedown', [root], (e) => {
-			listener.setActiveNode(root)
+		controller.on('onmousedown', [root], (e) => {
+			if(isArrow(e)) return
+			controller.setActiveNode(root)
 		})
 	}
 
 	const onMouseUp = (root) => {
-		listener.on('onmouseup', [document.body], (e) => {
-			listener.unsetActivedNode()
+		controller.on('onmouseup', [document.body], (e) => {
+			controller.unsetActivedNode()
+		})
+	}
+
+	const onClick = (root) => {
+		controller.on('onclick', [root], (e) => {
+			if(!isArrow(e)) return
+
+			const axes = controller.getArrowPosition(root)
+
+			controller.createArrow(axes, rootNode)
 		})
 	}
 
@@ -54,10 +69,10 @@ const initConversation = () => {
 		roots.forEach( root => {
 			onMouseMove(root)
 			onMouseDown(root)
-			onMouseUp(root)			
+			onMouseUp(root)		
+			onClick(root)	
 		})
 	}
-
 
 
 	return { render }

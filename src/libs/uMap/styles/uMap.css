@@ -5,7 +5,13 @@
 	top:150px;
 	left:50%;
 	transform:translateX(-50%);
-	z-index:5000
+	z-index:99;
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none;	
 }
 
 .umap.template {
@@ -77,6 +83,10 @@
 	transition:.3s ease-in
 }
 
+.umap .arrow:hover {
+	background:rgb(227, 74, 59)
+}
+
 .umap .arrow-left,
 .umap .arrow-right {
 	top:50%;
@@ -108,5 +118,19 @@
 .umap:hover .arrow-bottom {
 	width:15px;
 	height:15px;	
+}
+ .umap-svg {
+	display: block;
+	float:left;
+	width:100%;
+	height:100vh;
+	position:relative;
+	z-index:89;
+}
+.umap-svg .curve,
+.umap-svg #curve {
+	fill:none; 
+	stroke:#e34a3b; 
+	stroke-width: 3px;
 }
 
