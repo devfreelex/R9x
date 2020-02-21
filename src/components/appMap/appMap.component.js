@@ -42,7 +42,11 @@ const appMapComponent = () => {
 	const afterOnRender = () => [setInitNodeMap]
 
 	const setInitNodeMap = () => {
-		editor.render(getState(), 'init_conversation', context[0])
+		const state = getState()
+		const init = editor.getComponent(state, 'initConversation')
+		const end = editor.getComponent(state, 'endConversation')
+		
+		init.render(state, context)
 	}
 
 	const onSetContext = ({elm, query, on}) => {

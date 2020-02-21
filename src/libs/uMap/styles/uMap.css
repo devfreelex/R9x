@@ -2,7 +2,7 @@
 	display:block;
 	float:left;
 	position:absolute;
-	top:75px;
+	top:150px;
 	left:50%;
 	transform:translateX(-50%);
 	z-index:5000
@@ -18,10 +18,31 @@
 	box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);	
 }
 
+.umap.on-drag {
+	cursor: move; /* fallback if grab cursor is unsupported */
+	cursor: grab;
+	cursor: -moz-grab;
+	cursor: -webkit-grab;
+}
+
+ /* (Optional) Apply a "closed-hand" cursor during drag operation. */
+.umap.on-drag:active {
+	cursor: grabbing;
+	cursor: -moz-grabbing;
+	cursor: -webkit-grabbing;
+	border-color:rgb(227, 74, 59)
+}
+
 .umap .title {
 	display: block;
 	float:left;
 	width:100%;
 	padding:15px;
 	border-bottom:1px #ebebeb solid;
+}
+
+.umap .container {
+	display:block;
+	float:left;
+	width:100%;
 }
