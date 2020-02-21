@@ -47,6 +47,9 @@ const appMapComponent = () => {
 		const end = editor.getComponent(state, 'endConversation')
 		
 		init.render(state, context)
+		init.render(state, context)
+		init.render(state, context)
+		init.render(state, context)
 	}
 
 	const onSetContext = ({elm, query, on}) => {

@@ -9,15 +9,21 @@ const initConversation = () => {
 		<init-conversation class="umap template">
 			<div class="container">
 				<div class="title">Event Inicial</div>
-			</div>		
+			</div>	
+			<div class="arrow-wrapper">
+				<div class="arrow arrow-left"></div>
+				<div class="arrow arrow-top"></div>
+				<div class="arrow arrow-right"></div>
+				<div class="arrow arrow-bottom"></div>
+			</div>	
 		</init-conversation>
 	`
 
 	const render = (state, context) => {
 		context.forEach( rootElement => {
 			rootElement.insertAdjacentHTML('beforeend', template(state))
-			setListeners(document.querySelector('init-conversation'))
 		})
+		setListeners()
 	}
 
 	const query = (selector, nodeElement) => {
@@ -43,10 +49,13 @@ const initConversation = () => {
 		})
 	}
 
-	const setListeners = (root) => {
-		onMouseMove(root)
-		onMouseDown(root)
-		onMouseUp(root)
+	const setListeners = () => {
+		const roots = Array.from(document.querySelectorAll('init-conversation'))
+		roots.forEach( root => {
+			onMouseMove(root)
+			onMouseDown(root)
+			onMouseUp(root)			
+		})
 	}
 
 
