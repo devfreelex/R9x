@@ -4,9 +4,9 @@ import { controllerFactory } from '../../utils/controller.factory'
 const initConversation = (rootNode, state) => {
 	
 	const controller = controllerFactory()
-
+	
 	const template = (state) => html`
-		<init-conversation class="umap template">
+		<init-conversation key="${controller.getKey()}" class="umap template">
 			<div class="container">
 				<div class="title">Event Inicial</div>
 			</div>	
@@ -57,10 +57,9 @@ const initConversation = (rootNode, state) => {
 	const onClick = (root) => {
 		controller.on('onclick', [root], (e) => {
 			if(!isArrow(e)) return
-
 			const axes = controller.getArrowPosition(root)
-
-			controller.createArrow(axes, rootNode)
+			const key = root.getAttribute('key')
+			controller.createArrow(key, axes, rootNode)
 		})
 	}
 

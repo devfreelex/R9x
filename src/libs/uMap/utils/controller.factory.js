@@ -17,27 +17,48 @@ const controllerFactory = () => {
 		nodes.forEach( node =>  node[eventName] = callback)
 	}
 
-	const createArrow = (axes, editorContext) => {
-		console.log(`M${ axes.x }, ${ axes.y }`)
+	const createArrow = (key, axes, editorContext) => {
+
 		const svg = editorContext.querySelector('svg')
+
 		const arrowTemplate = html`
-				<g id="main">
+				<g id="main">	
+					<defs>
+							<marker id="markerCircle" markerWidth="8" markerHeight="8" refX="5" refY="5">
+									<circle class="circle" cx="5" cy="5" r="3"/>
+							</marker>
+
+							<marker id="markerArrow" markerWidth="13" markerHeight="13" refX="2" refY="6"
+										orient="auto">
+									<path class="line-arrow" d="M2,2 L2,11 L10,6 L2,2" />
+							</marker>
+					</defs>									
 					<circle id="curveController" cx="175" cy="100" r="5"/>
-					<path id="curve" d="m${axes.x},${axes.y - 75} 0,100"/>
+					<path id="curve" key-initial="${key}" key-final="" d="m${axes.x},${axes.y - 75} 0,100"/>
 				</g>		
 		`
 		svg.insertAdjacentHTML('beforeend', arrowTemplate)
 	}
 
+	const getKey = () => {
+		const min = 1
+		const max = 999999
+		const key = (Math.random() * (max - min) + min).toString();
+		return Math.floor(key)
+	}
+
 	const getScrollLeft = () => {
 		return window.pageXOffset || document.documentElement.scrollLeft
 	}
+
 	const getScrollTop = () => {
 		return window.pageYOffset || document.documentElement.scrollTop
 	}
+
 	const getTargetWidth = (target) => {
 		return target.offsetWidth		
 	}
+
 	const getTargetHeight = (target) => {
 		return target.offsetHeight		
 	}
@@ -98,6 +119,7 @@ const controllerFactory = () => {
 
 	return { 
 		on, 
+		getKey,
 		getPosition, 
 		getTargetWidth,
 		getTargetHeight,

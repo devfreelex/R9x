@@ -132,5 +132,16 @@
 	fill:none; 
 	stroke:#e34a3b; 
 	stroke-width: 3px;
+	marker-start: url('#markerCircle');
+	marker-end: url('#markerArrow');	
 }
+
+.umap-svg #markerCircle,
+.umap-svg #markerArrow,
+.umap-svg #markerCircle .circle,
+.umap-svg #markerCircle .line-arrow {
+	fill:#e34a3b;	
+	stroke:none; 
+}
+
 
