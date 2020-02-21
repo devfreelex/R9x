@@ -13,6 +13,11 @@ const controllerFactory = () => {
 		return !!element
 	}	
 
+	const hasArrow = (container) => {
+		const key = container.getAttribute('key')
+		return !!document.querySelector(`[key-initial="${key}"]`)
+	}
+
 	const on = (eventName, nodes, callback) => {
 		nodes.forEach( node =>  node[eventName] = callback)
 	}
@@ -106,11 +111,25 @@ const controllerFactory = () => {
 			Object.assign(context.axes, axes)
 	}
 
+	const moveArrow = (container) => {
+		if(!hasArrow(container)) return
+		const key = container.getAttribute('key')
+		const arrow = document.querySelector(`[key-initial="${key}"]`)
+		const arrowPosition = arrow.getAttribute('d')
+		const axes = getArrowPosition(container)
+		const offsetTop = getTargetHeight(container) / 2
+		const basePosition = `m${axes.x},${axes.y - offsetTop - 38	}`
+		const newPosition = `${basePosition} ${arrowPosition.split(' ').slice(1)}`
+
+		arrow.setAttribute('d', newPosition)
+	}
+
 	const moveElement = () => { 
 		if (!isValid(context.activedNode.element)) return
 
 		const style = `top:${context.axes.y}px; left:${context.axes.x}px;`
 		context.activedNode.element.setAttribute('style', style)
+		moveArrow(context.activedNode.element)
 	}
 
 	const logger = () => {
