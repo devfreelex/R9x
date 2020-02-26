@@ -35,9 +35,11 @@ const initConversation = (rootNode, state) => {
 	}
 
 	const onMouseMove = (root) => {
-		controller.on('onmousemove', [document.body], (e) => {
+		controller.on('onmousemove', [document.body], (e) => { 
+			// console.log(e)
 			controller.setAxes({ x: e.clientX, y: e.clientY })
 			controller.moveElement()
+			controller.moveActivedArrow({ x: e.clientX, y: e.clientY })
 		})
 	}
 
@@ -51,15 +53,21 @@ const initConversation = (rootNode, state) => {
 	const onMouseUp = (root) => {
 		controller.on('onmouseup', [document.body], (e) => {
 			controller.unsetActivedNode()
+
 		})
 	}
 
 	const onClick = (root) => {
 		controller.on('onclick', [root], (e) => {
-			if(!isArrow(e)) return
-			const axes = controller.getArrowPosition(root)
-			const key = root.getAttribute('key')
-			controller.createArrow(key, axes, rootNode)
+			if (!isArrow(e)) return
+			if (!controller.hasActivedArrow()) {
+				const axes = controller.getArrowPosition(root)
+				const key = root.getAttribute('key')
+				controller.createArrow(key, axes, rootNode)
+			} else {
+				controller.setFinalArrowPosition(e.target, {x:e.clientX, y:e.clientY})
+			}
+
 		})
 	}
 

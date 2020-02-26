@@ -66,12 +66,18 @@
 	transition: .5s all
 }
 
-.umap:hover .arrow-wrapper {
+.umap .arrow-wrapper:hover {
 	opacity:1;
 	cursor: move; /* fallback if grab cursor is unsupported */
 	cursor: grab;
 	cursor: -moz-grab;
 	cursor: -webkit-grab;	
+}
+.umap .arrow-wrapper:active {
+	cursor: grabbing;
+	cursor: -moz-grabbing;
+	cursor: -webkit-grabbing;
+	border-color:rgb(227, 74, 59)
 }
 
 .umap .arrow {
