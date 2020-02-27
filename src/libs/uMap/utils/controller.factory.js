@@ -94,17 +94,17 @@ const controllerFactory = () => {
 		
 	}
 
-	const getBasePosition = () => {
-		const arrowElement = context.activedArrow.element
+	const getBasePosition = (arrow) => {
+		const arrowElement = arrow || context.activedArrow.element
 		return arrowElement.getAttribute('d').replace('m', '').split(' ')
 	}
 
-	const getBaseX = () => {
-		return getBasePosition().shift().split(',').shift()
+	const getBaseX = (arrow) => {
+		return getBasePosition(arrow).shift().split(',').shift()
 	}
 
-	const getBaseY = () => {
-		return getBasePosition().shift().split(',').pop()		
+	const getBaseY = (arrow) => {
+		return getBasePosition(arrow).shift().split(',').pop()		
 	}
 
 	const setActiveNode = (element) => {
@@ -124,7 +124,7 @@ const controllerFactory = () => {
 		context.activedArrow.element.setAttribute('key-final', key)
 	}
 
-	const setFinalArrowPosition = (target, mouse) => {
+	const setFinalArrowPosition = (target) => {
 		const arrowElement = context.activedArrow.element
 		const targetAxes = target.getBoundingClientRect()
 		const axes = { x: targetAxes.left - getBaseX(), y: targetAxes.top - (parseInt(getBaseY()) + 85) }
@@ -166,29 +166,64 @@ const controllerFactory = () => {
 			Object.assign(context.axes, axes)
 	}
 
-	const moveArrow = () => {
-		if (!hasArrow(context.activedNode.element)) return
-		const container = context.activedNode.element
-		const key = container.getAttribute('key')
+	const moveArrowByInitialKey = (key) => {
 		const arrows = document.querySelectorAll(`[key-initial="${key}"]`)
+		const container = context.activedNode.element
 		let arrowPosition, axes, offsetTop, basePosition, newPosition
-		arrows.forEach( arrow => {
+		arrows.forEach(arrow => {
 			arrowPosition = arrow.getAttribute('d')
 			axes = getArrowPosition(container)
 			offsetTop = getTargetHeight(container) / 2
 			basePosition = `m${axes.x},${axes.y - offsetTop - 38}`
 			newPosition = `${basePosition} ${arrowPosition.split(' ').slice(1)}`
 
-			arrow.setAttribute('d', newPosition)			
+			arrow.setAttribute('d', newPosition)
 		})
 	}
 
-	const moveElement = () => { 
-		if (!isValid(context.activedNode.element)) return
+	const moveArrowByFinalKey = (key) => {
+		const arrows = Array.from(document.querySelectorAll(`[key-initial="${key}"]`))
+		const selectedArrows = arrows.filter( arrow => {
+			const keyFinal = arrow.getAttribute('key-final')
+			if(keyFinal) return arrow
+		})
+		
+		const parents = selectedArrows.map( selectedArrow => {
+			const keyFinal = selectedArrow.getAttribute('key-final')
+			const parent = document.querySelector(`[key="${keyFinal}"]`)
+			return parent
+		})
 
+		parents.forEach( parent => {
+			const parentAxes = parent.getBoundingClientRect()
+			
+			const arrowElement = arrows.find( arrow => {
+				if(arrow.getAttribute('key-final') === parent.getAttribute('key')) return arrow
+			})
+
+			const axes = { x: (parentAxes.left + 125) - getBaseX(arrowElement), y: parentAxes.top - (parseInt(getBaseY(arrowElement)) + 85) }
+			const basePosition = getBasePosition(arrowElement).shift()
+			const newPosition = `m${basePosition} ${axes.x},${axes.y}`
+			const keyFinal = parent.getAttribute('key')
+			arrowElement.setAttribute('key-final', keyFinal)
+			arrowElement.setAttribute('d', newPosition)	
+
+		})
+	}
+
+	const moveArrowByKey = (key) => { 
+		if (!hasArrow(context.activedNode.element)) return
+		moveArrowByInitialKey(key)
+		moveArrowByFinalKey(key)
+	}
+
+	const moveElement = () => { 
+		const activedElement = context.activedNode.element
+		if (!isValid(activedElement)) return
+		const key = activedElement.getAttribute('key')
 		const style = `top:${context.axes.y}px; left:${context.axes.x}px;`
 		context.activedNode.element.setAttribute('style', style)
-		moveArrow()
+		moveArrowByKey(key)
  	}
 
 	const moveActivedArrow = (mouse) => {
@@ -198,8 +233,8 @@ const controllerFactory = () => {
 		const basePosition = arrowElement.getAttribute('d').replace('m','')
 		const baseX = basePosition.split(' ').shift().split(',').shift()
 		const baseY = basePosition.split(' ').shift().split(',').pop()
-		
-		arrowElement.setAttribute('d', `m${baseX},${baseY} ${mouse.x - baseX},${mouse.y - (parseInt(baseY) + 75)}`)
+		const newPosition = `${baseX},${baseY} ${mouse.x - baseX},${mouse.y - (parseInt(baseY) + 75)}`
+		arrowElement.setAttribute('d', `m${newPosition}`)
 	}
 
 	const logger = () => {

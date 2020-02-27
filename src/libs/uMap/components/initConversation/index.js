@@ -65,7 +65,7 @@ const initConversation = (rootNode, state) => {
 				const key = root.getAttribute('key')
 				controller.createArrow(key, axes, rootNode)
 			} else {
-				controller.setFinalArrowPosition(e.target, {x:e.clientX, y:e.clientY})
+				controller.setFinalArrowPosition(e.target)
 			}
 
 		})
