@@ -94,6 +94,22 @@ const controllerFactory = () => {
 		
 	}
 
+	const getApexPosition = (arrow) => {
+		const arrowElement = arrow || context.activedArrow.element
+		const keyInitial = arrowElement.getAttribute('key-initial')
+		const parent = document.querySelector(`[key-initial="${keyInitial}"]`)
+		const axes = parent.getBoundingClientRect()
+		return {x: axes.left, y:axes.top}	
+	}
+
+	const getApexX = (arrow) => {
+		return getApexPosition(arrow).x
+	}
+
+	const getApexY = (arrow) => {
+		return getApexPosition(arrow).y
+	}
+
 	const getBasePosition = (arrow) => {
 		const arrowElement = arrow || context.activedArrow.element
 		return arrowElement.getAttribute('d').replace('m', '').split(' ')
@@ -105,6 +121,12 @@ const controllerFactory = () => {
 
 	const getBaseY = (arrow) => {
 		return getBasePosition(arrow).shift().split(',').pop()		
+	}
+
+	const getOriginAxes = (arrow) => {
+		const keyInitial = arrow.getAttribute('key-initial')
+		const parent = document.querySelector(`[key-initial="${keyInitial}"]`)
+		return parent.getBoundingClientRect()
 	}
 
 	const setActiveNode = (element) => {
@@ -237,6 +259,27 @@ const controllerFactory = () => {
 		arrowElement.setAttribute('d', `m${newPosition}`)
 	}
 
+	const moveArrowsBinded = (mouse) => {
+		if(!context.activedNode.element) return
+		const activedNode = context.activedNode.element
+		const key = activedNode.getAttribute('key')
+		const arrows = Array.from(document.querySelectorAll(`[key-final="${key}"]`))
+		const parentAxes = activedNode.getBoundingClientRect()
+
+		arrows.forEach( arrowElement => {
+			if (arrowElement.getAttribute('key-final') !== activedNode.getAttribute('key')) return
+
+			const axes = { x: (parentAxes.left + 125) - getBaseX(arrowElement), y: parentAxes.top - (parseInt(getBaseY(arrowElement)) + 85) }
+			const basePosition = getBasePosition(arrowElement).shift()
+			const newPosition = `m${basePosition} ${axes.x},${axes.y}`
+			const keyFinal = activedNode.getAttribute('key')
+			arrowElement.setAttribute('key-final', keyFinal)
+			arrowElement.setAttribute('d', newPosition)	
+
+		})
+
+	}
+
 	const logger = () => {
 		console.log(context)
 	}
@@ -257,7 +300,8 @@ const controllerFactory = () => {
 		logger,
 		moveActivedArrow,
 		hasActivedArrow,
-		setFinalArrowPosition
+		setFinalArrowPosition,
+		moveArrowsBinded
 	}
 }
 

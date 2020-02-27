@@ -40,6 +40,7 @@ const initConversation = (rootNode, state) => {
 			controller.setAxes({ x: e.clientX, y: e.clientY })
 			controller.moveElement()
 			controller.moveActivedArrow({ x: e.clientX, y: e.clientY })
+			controller.moveArrowsBinded({ x: e.clientX, y: e.clientY })
 		})
 	}
 
