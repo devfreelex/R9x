@@ -112,8 +112,12 @@ const controllerFactory = () => {
 		context.activedNode.element = element
 	}
 
-	const setActivedArrow = (key) => {
-		context.activedArrow.element = document.querySelector(`[key-initial="${key}"]`)
+	const setActivedArrow = (key) => { 
+		const arrows = Array.from(document.querySelectorAll(`[key-initial="${key}"]`))
+		arrows.forEach( arrow => {
+			const keyFinal = arrow.getAttribute('keyFinal')
+			if (!keyFinal) context.activedArrow.element = arrow
+		})
 	}
 
 	const setFinalKey = (key) => {
@@ -196,7 +200,6 @@ const controllerFactory = () => {
 		const baseY = basePosition.split(' ').shift().split(',').pop()
 		
 		arrowElement.setAttribute('d', `m${baseX},${baseY} ${mouse.x - baseX},${mouse.y - (parseInt(baseY) + 75)}`)
-		// console.log(`m${baseX},${baseY} ${baseX},100`)
 	}
 
 	const logger = () => {
