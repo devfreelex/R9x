@@ -141,15 +141,17 @@
 .umap-svg #curve {
 	fill:none; 
 	stroke:#e34a3b; 
-	stroke-width: 3px;
 	marker-start: url('#markerCircle');
 	marker-end: url('#markerArrow');	
+	stroke-width: 2px;
 }
 
 .umap-svg #markerCircle,
 .umap-svg #markerArrow,
 .umap-svg #markerCircle .circle,
 .umap-svg #markerCircle .line-arrow {
+	width:5px;
+	height:5px;
 	fill:#e34a3b;	
 	stroke:none; 
 }
