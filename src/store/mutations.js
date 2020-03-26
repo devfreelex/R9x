@@ -1,11 +1,23 @@
 import { logState } from '../core/store'
 
-const CHANGE_MENU = (state, payload) => {
+const TOGGLE_MENU = (state, payload) => {
 	state.menu.isVisible = !payload.menu.isVisible
 }
 
+const TOGGLE_SIDEBAR = (state, payload) => {
+	state.sidebar.isVisible = payload.isVisible
+	state.sidebar.nodeKey = payload.nodeKey
+}
+
+const SAVE_NODES_STATE = (state, payload) => {
+	state.nodes = payload.nodes
+	state.arrows = payload.arrows
+}
+
 const mutations = {
-	CHANGE_MENU
+	TOGGLE_MENU,
+	TOGGLE_SIDEBAR,
+	SAVE_NODES_STATE
 }
 
 export { mutations }

@@ -1,3 +1,27 @@
 body {
 	font-family: 'Comfortaa', cursive;
 }
+
+.umap .template-spetch-text {
+		display: block;
+    float: left;
+    width: 250px;
+    min-height: 75px;
+    background: rgba(184, 245, 250, 0.522);
+    border-radius: 4px;
+    border: 1px #f9f9f9 solid;
+    box-shadow: 3px 3px 3px #a2c7c5;
+    position: relative;	
+}
+
+.umap .template-text-spetch {
+		display: block;
+    float: left;
+    width: 250px;
+    min-height: 75px;
+    background: rgba(247, 192, 230, 0.522);
+    border-radius: 4px;
+    border: 1px #f9f9f9 solid;
+    box-shadow: 3px 3px 3px #e1c9e6;
+    position: relative;	
+}

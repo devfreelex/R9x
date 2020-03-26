@@ -1,4 +1,5 @@
 import { routerFactory } from '../store/router'
+import { getState } from '../core/store'
 
 const appFactory = () => {
 	let _components = {}
@@ -10,21 +11,23 @@ const appFactory = () => {
 	}
 
 	const _setRoutes = (routes) => {
+		if(!routes || !Array.isArray(routes)) return
 		_router.use(routes)
 	}
 
 	const _setComponents = (components) =>{
+		if(!components || !typeof(components) === 'object') return
 		_components = components
 	}
 
 	const _initStore = () => {
-		_store()
+		_store.init()
 	}
 
 	const _initComponents = () => {
-		for (let component of _components) {
-			component().init()
-		}		
+		for (let component in _components) {
+			_components[component]['init'](getState(), document.querySelector('body'))
+		}
 	}
 
 	const _initRouter = () => {

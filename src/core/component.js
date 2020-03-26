@@ -1,6 +1,6 @@
 import { eventDrive } from './eventDrive'
-
-const _component = {}
+let _components = []
+let _component = {}
 let _scope = null
 let elm = null
 
@@ -24,41 +24,58 @@ const _bindTemplate = () => {
 
 const createComponent = () => { 
 	const scope = _scope()
-
-	scope.forEach( key => {
-		if(key.name !== 'methods' && key.name !== 'template') {
-			_component[key.name] = key()
+	const component = {}
+	
+	scope.forEach( scopeKey => { 
+		if (scopeKey.name !== 'methods' && scopeKey.name !== 'template') {
+			component[scopeKey.name] = scopeKey()
 		}
 
-		if(key.name === 'template') {
-			_component[key.name] = key
+		if (scopeKey.name === 'methods') {
+			component[scopeKey.name] = _arrayToObject(scopeKey())
 		}
 
-		if(key.name === 'methods') {
-			_component[key.name] = _arrayToObject(key())
+		if (scopeKey.name === 'template') {
+			component[scopeKey.name] = scopeKey
 		}
+
+
+
+
 	})
 
-	_component.init = (parentNode) => {
-		_listenHooks()
+	component.init = (state, context) => {
+		_listenHooks(component.name)
 		_bindTemplate()
-		render(parentNode)
-		_emitEvent(_component.name, 'beforeOnRender')
-		_bindStyles()
+		render(component.name, state, context)
+		_emitEvent(component.name, 'beforeOnRender')
 	}
 
-	return Object.assign({}, _component)
+	_component = Object.assign({}, component)
+	_components.push(Object.assign({}, component))
+
+	return Object.assign({}, component)
+
 }
 
-const render = (parentNode) => { 
-	const { elements, template } = _component
-
-	elements.forEach( element => {
-		element.innerHTML = template()
+const render = (componentName, state) => { 
+	const component = _components.find( component => {
+		if(component.name === componentName) return component
 	})
 
-	_bindStyles()
-	_initListeners(elements)	
+	const elements = Array.from(document.querySelectorAll(component.name))
+
+	elements.forEach( element => {
+		const template = component.template()
+		const html = template.HTML(state)
+
+		if (typeof html === 'function') {
+			element.innerHTML = html()
+		}
+	})
+	
+	_bindStyles(component)
+	_initListeners(component)	
 }
 
 const _emitEvent = (componentName, eventName) => {
@@ -72,7 +89,7 @@ const _getHandlers = (hook) => {
 const _execHandlers = (hookName, handlers) => { 
 	if(!handlers || !handlers.length) return
 	elm = Array.from(document.querySelectorAll(_component.name))
-	handlers.forEach(handler => {
+	handlers.forEach(handler => { 
 		const handle = handler.bind(null, {elm, query, on})
 		eventDrive.on(_component.name, hookName, handle)
 	})
@@ -86,8 +103,11 @@ const _initHook = (hookName, hooks, methods) => {
 	_execHandlers(hook.name, handlers)
 }
 
-const _listenHooks = () => {
-	const { hooks, methods } = _component	
+const _listenHooks = (componentName) => {
+	const component = _components.find(component => {
+		if(component.name === componentName) return component
+	})
+	const { hooks, methods } = component	
 	hooks.forEach( hook => {
 		_initHook(hook.name, hooks, methods)
 	})
@@ -105,13 +125,14 @@ const query = (selector, context) => {
 	})
 }
 
-const _initListeners = (elements) => {
-	const { listeners, methods } = _component
-	elm = Array.from(document.querySelectorAll(_component.name))
-	listeners.forEach(listener => {
-		listener({ elm, on, query }, methods)
+const _initListeners = (component) => {
+	// console.log(component)
+	elm = Array.from(document.querySelectorAll(component.name))
+	component.listeners.forEach(listener => {
+		listener({ elm, on, query }, component.methods)
 	})
-	_emitEvent(_component.name, 'afterOnRender')
+
+	_emitEvent(component.name, 'afterOnRender')
 }
 
 const logComponent = () => console.log(_component)
@@ -135,22 +156,22 @@ const _styleExists = () => {
 	return !!styleElement	=== true
 }
 
-const _insertStyle = () => {
+const _bindStyles = (component) => { 
 	const styleElement = document.createElement('style')
-	styleElement.setAttribute('id', _component.name)
-	styleElement.textContent = _component.style
+	const css = component.template().CSS().trim().replace(/.+{/g, `${component.name} $&`)
+	styleElement.setAttribute('id', component.name)
+	styleElement.textContent = css
 	document.body.insertAdjacentElement('beforeend', styleElement)
 }
+const renderer = (componentName, template) => {
+	const component = _components.find( component => {
+		if(component.name === componentName) return component
+	})
 
-const _bindStyles = () => {
-	if (_isEmptyStyle() || _styleExists()) return
-	_insertStyle()
-}
-const renderer = (template) => {
-	
-	const elements = Array.from(document.querySelectorAll(_component.name))
-	_component.elements = elements
-	_component.template = template
+	const elements = Array.from(document.querySelectorAll(component.name))
+	component.elements = elements
+	component.template = template
+	console.log('--->', component.template)
 }
 
 const html = (tags, ...values) => {

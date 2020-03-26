@@ -5,7 +5,8 @@ const pubSub = () => {
 		return false
 	}
 
-	const on = (componentName, eventName, callback) => {
+	const on = (componentName, eventName, callback) => { 
+		// console.log(componentName, eventName)
 		if(!componentName || !eventName || !callback) return
 		
 		if (_listeners.hasOwnProperty(componentName)) {
@@ -21,7 +22,7 @@ const pubSub = () => {
 		}
 	}
 
-	const fire = (componentName, eventName) => { 
+	const fire = (componentName, eventName) => { componentName
 		if(!_listeners[componentName]) return 
 		if (!_listeners[componentName][eventName]) return
 

@@ -2,13 +2,14 @@ import { renderer, html } from '../../core/component'
 
 const mainTemplate = (state) => { 
 	
-	const template = () => `
+	return () => html`
 	<div class="app-main-wrapper">
-		<app-creator></app-creator>
-		<app-map></app-map>
+			<app-creator></app-creator>		
+			<app-editor></app-editor>
+			<app-menu></app-menu>	
+			<app-sidebar></app-sidebar>	
 	</div>
 	`
-	renderer(template)
 }
 
 export { mainTemplate }
