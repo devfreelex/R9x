@@ -1,0 +1,48 @@
+{
+  "name": "joke-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel index.html -p 3000",
+    "prebuil-h": "shx rm -rf dist/**/*",
+    "build-h": "cross-env NODE_ENV=homolog parcel build index.html --public-url ./",
+    "prebuil-p": "shx rm -rf dist/**/*",
+    "build-p": "cross-env NODE_ENV=production parcel build index.html --public-url ./"
+  },
+  "browserslist": [
+    "IE 10",
+    "last 3 versions",
+    "not IE < 9"
+  ],
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "useBuiltIns": "usage"
+        }
+      ]
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "autoprefixer": "^9.7.2",
+    "babel-preset-es2015-ie": "^6.7.0",
+    "cross-env": "^6.0.3",
+    "less": "^3.10.3",
+    "parcel-bundler": "^1.12.4",
+    "shx": "^0.3.2"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/polyfill": "^7.7.0",
+    "babel-polyfill": "^6.26.0",
+    "whatwg-fetch": "^3.0.0"
+  }
+}
