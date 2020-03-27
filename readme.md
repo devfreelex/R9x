@@ -125,22 +125,17 @@ Agora vamos juntos entendendo o que é cada uma das 5 partes que envolvem todo e
 ```
 
  No trecho acima, epefiquei a linha de comando que deve ser seguida para gerar um build do projeto para 3 cenários: 
-
-1. Desenvolvimento
-
+ 
+ 1. Desenvolvimento
 > ```json 
 > "dev": "parcel index.html -p 3000", 
 > ```
-
 2. Homologação
-
 ```json
     "prebuil-h": "shx rm -rf dist/**/*",
     "build-h": "cross-env NODE_ENV=homolog parcel build index.html --public-url ./",
 ```
-
 3. Produção
-
 ```json
     "prebuil-p": "shx rm -rf dist/**/*",
     "build-p": "cross-env NODE_ENV=production parcel build index.html --public-url ./"
@@ -203,3 +198,5 @@ Para instalar todas as dependências, você deve no diretório do projeto, atrav
 ```javascript
 	npm install
 ```
+
+
