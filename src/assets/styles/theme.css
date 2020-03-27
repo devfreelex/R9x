@@ -1,5 +1,5 @@
-body {
-	font-family: 'Comfortaa', cursive;
+body, *, *::before, *::after {
+font-family: 'Montserrat', sans-serif;
 }
 
 .umap .template-spetch-text {

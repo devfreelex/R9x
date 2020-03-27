@@ -1,7 +1,7 @@
-.umap {
-	color:#666;
-	font-family: 'Comfortaa';
-}
+.umap, *, p, h1, div, span {
+		font-family: 'comfortaaregular', cursive !important;
+		color:#666;
+} 
 
  .umap .umap-svg {
 	display: block;
