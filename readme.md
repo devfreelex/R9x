@@ -127,9 +127,9 @@ Agora vamos juntos entendendo o que é cada uma das 5 partes que envolvem todo e
  No trecho acima, epefiquei a linha de comando que deve ser seguida para gerar um build do projeto para 3 cenários: 
  
  1. Desenvolvimento
-> ```json 
-> "dev": "parcel index.html -p 3000", 
-> ```
+```json
+	 "dev": "parcel index.html -p 3000", 
+```
 2. Homologação
 ```json
     "prebuil-h": "shx rm -rf dist/**/*",
