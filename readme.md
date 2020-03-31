@@ -7,7 +7,6 @@ Embora esteja utilizando reactive 9x aqui você pode substituí-la por angular, 
 #### O que são Reactive 9x e Umpa?
 
 *Reactive 9x* é uma biblioteca reativa de minha autoria que pode ser utilizada para criação de aplicações front end (spa). Essa biblioteca assemelha-se aos frameworks angular, react e vue. Porém, é muito mais simples que os três anteriormente citados.
-=======
 
 *uMap* é uma biblioteca que pode ser utilizada para criação de mapas mentais ou organogramas. Essa biblioteca também é de minha autoria.
 
