@@ -47,7 +47,6 @@ const appEditorFactory = () => {
 		editorService.on('on-remove', ({ nodeKey }) => {
 			editorService.removeNode(nodeKey)
 		})
-		
 	}
 
 	return createComponent()

@@ -7,6 +7,7 @@ Embora esteja utilizando reactive 9x aqui você pode substituí-la por angular, 
 #### O que são Reactive 9x e Umpa?
 
 *Reactive 9x* é uma biblioteca reativa de minha autoria que pode ser utilizada para criação de aplicações front end (spa). Essa biblioteca assemelha-se aos frameworks angular, react e vue. Porém, é muito mais simples que os três anteriormente citados.
+=======
 
 *uMap* é uma biblioteca que pode ser utilizada para criação de mapas mentais ou organogramas. Essa biblioteca também é de minha autoria.
 
@@ -95,6 +96,7 @@ Copie o código abaixo e cole dentro do arquivo *package.json* localizado na rai
 Agora vamos juntos entendendo o que é cada uma das 6 partes que envolvem todo o esse trecho de código.
 
 * ##### Parte 1
+
 ```json
   "name": "Mind Map",
   "version": "1.0.0",
@@ -204,8 +206,6 @@ Para instalar todas as dependências, acesse o diretório raiz do projeto atrav�
 ```javascript
 	npm install
 ```
-
-
 ### Ponto de partida
 
 Agora que temos instaladas todas as dependências, precisamos configurar o ponto de start da aplicação. 
