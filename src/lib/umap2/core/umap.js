@@ -294,8 +294,13 @@ const uMap = () => {
 				eventEmitter.fire('on-remove', { nodeKey })
 				return
 			}
-			if (!e.target.classList.contains('connection-handle')) return
-			_createArrow(target)
+			if (e.target.classList.contains('connection-handle')) {
+				_createArrow(target)
+				return
+			}
+
+			console.log('não.....')
+			_selectedArrow = null
 		}
 
 	}

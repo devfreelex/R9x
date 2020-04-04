@@ -1,9 +1,8 @@
 ### Introdução
 
-Ao fim desse tutorial você terá desenvolvido uma aplicação que gera mapas mentais interativamente e dominado os ciclos de vida da biblioteca reactive 9x. Não obstante, também terá dominado a biblioteca uMap responsável por gerenciar os nodos do mapa, criados através da interação do usuário com a
-a biblioteca reactive 9x. 
+Ao fim desse tutorial você terá desenvolvido uma aplicação que gera mapas mentais interativamente e dominado os ciclos de vida da biblioteca reactive 9x. Não obstante, também terá dominado a biblioteca uMap responsável por gerenciar os nodos do mapa, criados através da interação do usuário com a biblioteca *Reactive 9x*. 
 
-Embora esteja utilizando reactive 9x aqui você pode substitui-la por angular, react ou vue.
+Embora esteja utilizando reactive 9x aqui você pode substituí-la por angular, react ou vue.
 
 #### O que são Reactive 9x e Umpa?
 
@@ -96,6 +95,7 @@ Copie o código abaixo e cole dentro do arquivo *package.json* localizado na rai
 Agora vamos juntos entendendo o que é cada uma das 6 partes que envolvem todo o esse trecho de código.
 
 * ##### Parte 1
+
 ```json
   "name": "Mind Map",
   "version": "1.0.0",
@@ -103,7 +103,7 @@ Agora vamos juntos entendendo o que é cada uma das 6 partes que envolvem todo o
   "main": "index.html",
 ```
 
-> Aque defini o nome do projeto *"name": "Mind Map"*, a versão *"version": "1.0.0"*, epecifiquei o que o projeto faz *"description": "Mind map manager"* e informei o arquivo  *index.html* assim ---> *"main": "index.html"*, para deixar claro que é o arquivo principal do projeto.
+> Aqui está definido o nome do projeto *"name": "Mind Map"*, a versão *"version": "1.0.0"*, o objetivo do projeto *"description": "Mind map manager"* e o arquivo  *index.html* assim ---> *"main": "index.html"*, para deixar claro que é o arquivo principal do projeto.
 
 
 * ##### Parte 2
@@ -119,7 +119,7 @@ Agora vamos juntos entendendo o que é cada uma das 6 partes que envolvem todo o
   },
 ```
 
- No trecho acima, epefiquei a linha de comando que deve ser seguida para gerar um build do projeto para 3 cenários: 
+ No trecho acima, temos a linha de comando que deve ser seguida para gerar um build do projeto para 3 cenários: 
  
  1. Desenvolvimento
 ```json
@@ -138,7 +138,7 @@ Agora vamos juntos entendendo o que é cada uma das 6 partes que envolvem todo o
 
 > Obeserve que em cada um dos 3 cenários está presente a palavra *parcel* que especifica o *MODULE BUNDLER* utilizado para transpilar *ES6* para *ES5* compatível com os navegadores atuais e mais antigos.
 
-* ##### 3
+* ##### Parte 3
 
 ```json
  "browserslist": [
@@ -163,7 +163,7 @@ Observe que acima temos a configuração de compatibilidade para browsers legado
     ]
   },
 ```
-Aqui configurei o *babel*, transpilador fora da caixa, para trabalhar junto com o *parcel* e gerar builds ES5 compatível com a maioria dos navegadores atuais e antigos.
+Aqui está presente a configuração do *babel*, transpilador fora da caixa, que trabalhará junto com o *parcel* e gerará builds ES5 compatível com a maioria dos navegadores atuais e antigos.
 
 * ##### Parte 5
 
@@ -183,9 +183,9 @@ Aqui configurei o *babel*, transpilador fora da caixa, para trabalhar junto com 
     "whatwg-fetch": "^3.0.0"		
   },
 ```
-No bloco acima, temos as configurações de instalação das dependências que precisaremos para rodar o projeto durante o desenvolvimento do mesmo.
+No bloco acima, temos as configurações de instalação das dependências que o projeto precisa para rodar durante o desenvolvimento do mesmo.
 
-Todos os items listados nesse trecho serão instalados o executar o comando abaixo no momento adequado.
+Todos os items listados nesse trecho serão instalados ao executar o comando abaixo no momento adequado.
 
 > npm install
 
@@ -196,7 +196,7 @@ Todos os items listados nesse trecho serão instalados o executar o comando abai
 ```
 Finalmente temos a configuração das dependências de terceiros que serão necessárias para a aplicação enquanto ela estiver sendo executada.
 
-> "A aplicação não dependerá de recursos desenvolvidos de terceiros."
+> "A aplicação não dependerá de recursos desenvolvidos por terceiros."
 
 #### Instalando as dependências
 
@@ -205,8 +205,6 @@ Para instalar todas as dependências, acesse o diretório raiz do projeto atrav�
 ```javascript
 	npm install
 ```
-
-
 ### Ponto de partida
 
 Agora que temos instaladas todas as dependências, precisamos configurar o ponto de start da aplicação. 
@@ -220,7 +218,7 @@ import 'whatwg-fetch'
 import '@babel/polyfill'
 ```
 
-O dois itens acima, são dependências de compatibilidade que o *parcel* executará no momento necessário para gerar código viável para os mais diversos navegadores.
+Os dois itens acima, são dependências de compatibilidade que o *parcel* executará no momento necessário para gerar código viável para os mais diversos navegadores.
 
 Ainda precisamos configurar o start da aplicação. Veja o código abaixo:
 
@@ -252,7 +250,7 @@ const app = appFactory()
 
 ```
 
-Devemos fornecer os componentes que serão executados na aplciação da seguinte forma:
+Devemos fornecer os componentes que serão executados na aplicação da seguinte forma:
 
 ```js
 import { appFactory } from './core/app'
@@ -401,9 +399,9 @@ const appNotFound = () => {
 export { appNotFound }
 ```
 
-Exclarecendo a estrutura, note que no trecho abaixo estão sendo importadas
-algumas dependências do componente provinientes do gerenciador de estado
-fornecido anteriormente no aquivo *main.js*, da seguinte forma:
+Exclarecendo a estrutura;
+
+> No trecho abaixo estão sendo importadas algumas dependências do componente provinientes do gerenciador de estado fornecido anteriormente no aquivo *main.js*.
 
 ```js
 app.use('store', store)
@@ -420,7 +418,7 @@ Logo depois temos:
 import { setScope, createComponent, render } from '../../core/component'
 ```
 
-Esse trecho é reponsável por importar *setScope* o gerenciador de escopo do administrador de componentes. Ele é quem define que componente está sendo atualizado durante cada interação dinâmica com o usuário.
+Esse trecho é reponsável por importar *setScope*, o gerenciador de escopo do administrador de componentes. Ele é quem define que componente está sendo atualizado durante cada interação dinâmica com o usuário.
 
 Também temos *createComponent* responsável por criar a estrutura do componente.
 
@@ -445,4 +443,183 @@ Esse trecho é reponsável por importar o *template (literal template (html))* e
 
 O trecho acima, marca o corpo do compoenente.
 
-A função *appNotFound* será executada em main.js para criar o componente assim que *app.init()* for executado no navegador.
+A função *appNotFound* será executada em main.js para criar o escopo do componente assim que *app.init()* for executado.
+
+#### Observando mudanças no state
+
+Logo abaixo você vai notar dentro do componente a presença de *watch* que é utilizado para observar o disparo de eventos que alteram o state da aplicação. Esses eventos são chamados de *mutations* e são disparados através de *actions* que por sua vez, são funções que recebem os novos dados e os repassam para as mutations fazerem alterações no state do app.
+```js
+//...código omitido
+
+import { render } from '../core/component'
+import { getState } from '../core/store'
+
+const appNotFound = () => {
+
+	watch(['CHANGE_TITLE'], () => [
+		 logState, render
+  ])
+  
+
+  const logState = () => console.log(getState())
+
+	//...código omitido...
+}
+```
+Veja que *watch* é capaz de observar diversos mutations ao mesmo tempo. Por isso, os identificadores de mutação são fornecidos entre *[ ]*. Sempre que um dos mutations forem disparados, as funções dentro do array retornada pela função anônima serão executadas. Veja abaixo:
+
+```js
+  watch(['CHANGE_TITLE'], () => [
+    logState, render
+  ])
+```
+
+#### Definindo o escopo do componente
+
+Abaixo você encontra o código responsável por definir o escopo do componente e injetar os recursos necessário para o correto funcionamento do componente.
+
+```js
+//... código omitido ...
+const appNotFound = () => {
+  //... código omitido ...
+  setScope(() => [
+    name,
+    template,
+    hooks,
+    listeners,
+    methods
+  ])
+ //... código omitido ...
+}
+```
+
+No trecho acima *setScope* define o escopo do componente e forncece as seguintes propriedades e recursos:
+
+1.  name
+
+A propriedade *name* define o seletor do componente. É através dela que o escopo se liga a representação html do componente e aplica todos os outros recursos ao mesmo, inclusive a estilização css.
+
+```js
+//...código omitido...
+
+const appNotFound = () => {
+
+  //...código omitido...
+
+  setScope(() => [
+    name
+  ])
+ 
+  const name = () => [
+    //...código omitido...
+  ]
+  //...código omitido...
+}
+
+```
+
+
+2. Template
+
+```js
+//...código omitido...
+
+const appNotFound = () => {
+
+//...código omitido...
+
+  setScope(() => [
+    template,
+  ])
+
+  const template = () => {
+    //...código omitido...
+  }
+
+//...código omitido...
+
+}
+
+```
+
+Através da propriedade template as funções que definem o estilo css e renderizam os dados no template são definidas.
+
+3. Hooks
+```js
+//...código omitido...
+
+const appNotFound = () => {
+
+//...código omitido...
+
+  setScope(() => [
+    hooks
+  ])
+
+  const hooks = () => [
+    //...código omitido...
+  ]
+
+//...código omitido...
+}
+
+```
+Até o momento, R9X tem apenas 2 hooks, *beforeOnRender* e *afterOnRender*.
+
+> *beforeOnRender* é responsável por permitir a execução de funções antes mesmo da renderização do componente.
+
+> *afterOnRender* é responsável por garantir que funções sejam executadas apenas depois da renderização do componente.
+
+4. Listeners
+```js
+//...código omitido...
+
+const appNotFound = () => {
+
+//...código omitido...
+
+  setScope(() => [
+    listeners,
+  ])
+
+  const listeners = () => [
+  //...código omitido...
+  ]
+
+//...código omitido...
+
+}
+
+```
+Como o próprio nome indica, *listeners* é responsável por realizar o bind de eventos do *DOM* previamente definidos nos componentes.
+
+5. Methods
+
+```js
+//...código omitido...
+
+const appNotFound = () => {
+
+  //...código omitido...
+
+  setScope(() => [
+    methods
+  ])
+
+  const methods = () => [
+    ...mapActions(),
+    logState
+  //...código omitido...
+  ]
+
+//...código omitido...
+
+}
+
+```
+
+A propriedade *methods* é reponsável por definir e compartilhar as funções (métodos) do componente com outros recursos do mesmo. Além disso, podemos transformar *actions* do gerenciador de estado em métodos do componente ao utilizar *mapActions*.
+
+#### Integrando uMap ao projeto
+
+Agora que você já entendeu como R9x funciona, partiremos para a inclusão de uMap ao projeto. Veja o trecho de código abaixo:
