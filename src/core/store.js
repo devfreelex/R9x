@@ -14,9 +14,18 @@ const setStore = (storeConfig) => {
 	assign(_mutations, mutations)
 }
 
-const execWatchers = (mutationId) => {
-	_watchers[mutationId].forEach( callbackProxy => {
-		callbackProxy().forEach(watcher => watcher(_state))
+const execWatchers = (mutationId) => { 
+	if (!_watchers[mutationId]) return
+
+	const watcherKeys = Object.keys(_watchers)
+	const watcherSelected = watcherKeys.find( watcher => {
+		if(watcher === mutationId) return watcher
+	})
+
+	_watchers[watcherSelected].forEach( callbackProxy => {
+		callbackProxy().forEach(watcher => {
+			watcher(_state)
+		})
 	})
 }
 
@@ -26,10 +35,12 @@ const dispatch = async (mutationId, payload) => {
 }
 
 const watch = (mutationList, callback) => {
-	mutationList.forEach( mutation => {
-		Array.isArray(_watchers[mutation])
-		? _watchers[mutation] = [..._watchers[mutation], callback]
-		:	_watchers[mutation] = [callback]
+	mutationList.forEach( mutation => {		
+		if(Array.isArray(_watchers[mutation])) {
+			_watchers[mutation] = [..._watchers[mutation], callback]
+			return
+		}
+		_watchers[mutation] = [callback]
 	})
 }
 

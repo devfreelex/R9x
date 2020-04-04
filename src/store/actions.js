@@ -1,14 +1,20 @@
 import { dispatch } from './../core/store'
 
 
-const changeMenu = (payload) => {
-	dispatch('CHANGE_MENU', payload)
+const toggleMenu = (payload) => {
+	dispatch('TOGGLE_MENU', payload)
+}
+const toggleSidebar = (payload) => { 
+	dispatch('TOGGLE_SIDEBAR', payload)
+}
+const saveNodesState = (payload) => { 
+	dispatch('SAVE_NODES_STATE', payload)
 }
 
-const changeOther = (payload) => { console.log('other')}
-
 const actions = {
-	changeMenu
+	toggleMenu,
+	toggleSidebar,
+	saveNodesState
 }
 
 export { actions }
